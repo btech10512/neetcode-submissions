@@ -1,0 +1,40 @@
+class Solution {
+public:
+    int characterReplacement(string s, int k) {
+        int n = s.length();
+
+                int maxCount = 0;
+
+                        int maxFreq = 0;
+
+                                int l = 0,r = 0;
+
+                                        vector<int>freq(26,0);
+
+                                                while(r < n) {
+
+                                                            // r = l;
+
+                                                                        freq[s[r]-'A']++;
+
+                                                                                    maxFreq = max(maxFreq,freq[s[r]-'A']);
+
+                                                                                                if((r-l+1) - maxFreq <= k) {
+
+                                                                                                               maxCount = max(maxCount,r-l+1);
+
+                                                                                                                           } else {
+
+                                                                                                                                           freq[s[l]-'A']--;
+
+                                                                                                                                                           l++;
+
+                                                                                                                                                                       }
+
+                                                                                                                                                                                   r++;
+
+                                                                                                                                                                                           }
+
+                                                                                                                                                                                                   return maxCount;
+    }
+};
