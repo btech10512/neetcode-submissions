@@ -1,0 +1,46 @@
+class Solution {
+    public:
+        int dx[4] = {-1,1,0,0};
+            int dy[4] = {0,0,-1,1};
+                void dfs(int i,int j,int prev_h,vector<vector<int>>& heights, vector<vector<int>> &visited) {
+                        if(i<0||i>=heights.size()||j<0||j>=heights[0].size()) return;
+                                if(visited[i][j] == 1 || prev_h > heights[i][j]) {
+                                            return;
+                                                    }
+                                                            visited[i][j] = 1;
+                                                                    for(int k=0;k<4;k++) {
+                                                                                int n_i = i + dx[k];
+                                                                                            int n_j = j + dy[k];
+                                                                                                        dfs(n_i,n_j,heights[i][j],heights,visited);
+                                                                                                                }
+
+                                                                                                                    }
+                                                                                                                        vector<vector<int>> pacificAtlantic(vector<vector<int>>& heights) {
+                                                                                                                                int n = heights.size();
+                                                                                                                                        int m = heights[0].size();
+                                                                                                                                                vector<vector<int>>visited1(n,vector<int>(m,0));
+                                                                                                                                                        for(int i=0;i<n;i++) {
+                                                                                                                                                                    for(int j=0;j<m;j++) {
+                                                                                                                                                                                    if(j>0 && i>0) continue;
+                                                                                                                                                                                                    dfs(i,j,-1,heights,visited1);
+                                                                                                                                                                                                                }
+                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                vector<vector<int>>visited2(n,vector<int>(m,0));
+                                                                                                                                                                                                                                        for(int i=0;i<n;i++) {
+                                                                                                                                                                                                                                                    for(int j=0;j<m;j++) {
+                                                                                                                                                                                                                                                                    if(i < n-1 && j < m-1) continue;
+                                                                                                                                                                                                                                                                                    dfs(i,j,-1,heights,visited2);
+                                                                                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                                                                                                vector<vector<int>>ans;
+
+                                                                                                                                                                                                                                                                                                                        for(int i=0;i<n;i++) {
+                                                                                                                                                                                                                                                                                                                                    for(int j=0;j<m;j++) {
+                                                                                                                                                                                                                                                                                                                                                    if(visited1[i][j] == 1 && visited2[i][j] == 1) {
+                                                                                                                                                                                                                                                                                                                                                                        ans.push_back({i,j});
+                                                                                                                                                                                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                                                                                                                                                                                    }
+                                                                                                                                                                                                                                                                                                                                                                                                            }
+                                                                                                                                                                                                                                                                                                                                                                                                                    return ans;
+                                                                                                                                                                                                                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                                                                                                                                                                                                        };
